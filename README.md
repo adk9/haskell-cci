@@ -11,11 +11,16 @@ Then build and install the bindings:
 
     $ cabal install
 
+To build with examples and tests turned on:
+
+    $ cabal install -f examples --enable-tests
+
 You might need extra flags if CCI is not installed in a standard
 location on your system:
 
     $ cabal install --extra-lib-dirs=/path/to/cci/lib \
                     --extra-include-dirs=/path/to/cci/include/
+
 
 The `LD_LIBRARY_PATH` will also need to be set before running any
 program or test in this case:
