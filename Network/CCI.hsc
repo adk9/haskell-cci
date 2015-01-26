@@ -293,9 +293,11 @@ getDevices = do
   where
     peekNullTerminated :: Ptr (Ptr a) -> Int -> IO [Ptr a]
     peekNullTerminated p i = do
-      d <- peekElemOff p i
-      if d == nullPtr then return []
-        else fmap (d:)$ peekNullTerminated p (i+1)
+      if p == nullPtr then return []
+        else do
+        d <- peekElemOff p i
+        if d == nullPtr then return []
+          else fmap (d:)$ peekNullTerminated p (i+1)
 
     mkDevice :: Ptr Device -> IO Device
     mkDevice p = do
